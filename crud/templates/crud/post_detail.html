@@ -1,0 +1,158 @@
+{% extends 'crud/base.html'%}
+{% load static %}
+{% block title%}
+<title>Post Detail Page</title>
+{% endblock title%} 
+
+{% block content%}
+ 
+<div class="blog-single gray-bg">
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div class="col-lg-9 m-15px-tb">
+                <article class="article">
+                    <div class="article-img">
+                        <img src="{{post.post_image.url}}" title="" alt="">
+                    </div>
+                    <div class="article-title">
+                        <!-- <h6><a href="#">Lifestyle</a></h6> -->
+                        <h2>{{post.title}}</h2>
+                        <div class="media">
+                            <div class="avatar">
+                                <img src="{{post.author.profile.pro_image.url}}" title="" alt="">
+                            </div>
+                            <div class="media-body">
+                                <label class="text-capitalize name_label">{{post.author.get_full_name}}</label>
+                                <span>Posted On {{post.timestamp}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p  class="text-justify post_detail_text">{{post.content| safe}}</p>
+                    </div>
+                    <!-- <div class="nav tag-cloud">
+
+                        <a href="#">Design</a>
+                        <a href="#">Development</a>
+                        <a href="#">Travel</a>
+                        <a href="#">Web Design</a>
+                        <a href="#">Marketing</a>
+                        <a href="#">Research</a>
+                        <a href="#">Managment</a>
+                    </div> -->
+                    <div class="d-flex justify-content-around">
+                        <span>Like</span>
+                        <span>Comment</span>
+                    </div>
+                    <hr>
+                  
+                <!-- <div class="like_comment_section d-flex justify-content-around align-items-center w-100 p-2">
+                  
+                    <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value={{obj.id}}>
+                        
+                            <button type="submit" class="btn btn-light px-4 like-btn">
+                                {% if profile not in obj.liked.all %}
+                                <i class="far fa-thumbs-up"></i> <span>Like</span>
+                                {% else %}
+                                <i class="far fa-thumbs-up" style="color:#007bff"></i> <span style="color:#007bff">Like</>
+                                {% endif%}
+                            </button>
+                    
+                    </form>
+                    
+                    
+               
+                <div><i class="far fa-comment-alt"></i> Comment</div>
+                <div><i class="far fa-share-square"></i> Share</div>
+                </div> -->
+        
+                    <hr>
+                </article>
+                 
+
+            </div>
+            <div class="col-lg-3 m-15px-tb blog-aside">
+                <!-- Author -->
+                <div class="widget widget-author">
+                    <div class="widget-title">
+                        <h3>Blog Owner</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="media align-items-center">
+                            <div class="avatar">
+                                <img src="{% static 'images/reserver.jpg' %}" title="" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h6>Hello, I'm<br> Ashhar</h6>
+                            </div>
+                        </div>
+                        <p>I am Web designer and Developer..</p>
+                    </div>
+                </div>
+                <!-- End Author -->
+                <!-- Trending Post -->
+                <!-- <div class="widget widget-post">
+                    <div class="widget-title">
+                        <h3>Trending Now</h3>
+                    </div>
+                    <div class="widget-body">
+
+                    </div>
+                </div> -->
+                <!-- End Trending Post -->
+                <!-- Latest Post -->
+                <div class="widget widget-latest-post">
+                    <div class="widget-title">
+                        <h3>Latest Post</h3>
+                    </div>
+                    <div class="widget-body">
+                        {% for post in latest_post%}
+                        <div class="latest-post-aside media">
+                            <div class="lpa-left media-body">
+                                <div class="lpa-title">
+                                    <h5 class="text-capitalize "<a href="{% url 'post-detail' post.id%}">{{post.title}}</a></h5>
+                                </div>
+                                <div class="lpa-meta">
+                                    <a class="name" href="#">
+                                        {{post.author}}
+                                    </a>
+                                    <a class="date" href="#">
+                                        {{post.timestamp}}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="lpa-right">
+                                <a href="#">
+                                    <img src="{{post.post_image.url}}" title="" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- End Latest Post -->
+                <!-- widget Tags -->
+                <div class="widget widget-tags">
+                    <div class="widget-title">
+                        <h3>Latest Tags</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="nav tag-cloud">
+                            <a href="#">Design</a>
+                            <a href="#">Development</a>
+                            <a href="#">Travel</a>
+                            <a href="#">Web Design</a>
+                            <a href="#">Marketing</a>
+                            <a href="#">Research</a>
+                            <a href="#">Managment</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End widget Tags -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}   

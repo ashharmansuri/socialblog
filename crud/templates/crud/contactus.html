@@ -1,0 +1,41 @@
+{% extends 'crud/base.html'%}
+
+{% block title%}
+<title>Contact Page</title>
+{% endblock title%} 
+
+{% block content%}
+
+ <div class=" container contact-form article-comment mt-5">
+    <h3 class="text-center text-capitalize display-4">Contact Us Form</h3>
+    <h4>Leave a Reply</h4>
+    
+    <form id="contact-form" method="POST" class="mt-4">
+        {%csrf_token%}
+       
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input name="sender_name" id="name" placeholder="Name *" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input name="Email" id="email" placeholder="Email *" class="form-control" type="email">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <textarea name="message" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="send">
+                    <button type="submit" class="px-btn theme"><span>Submit</span> <i class="arrow"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content%}

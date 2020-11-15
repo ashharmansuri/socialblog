@@ -1,0 +1,39 @@
+{% extends 'crud/base.html'%}
+
+{% load static %}
+
+
+{% block title%}
+<title>Upload Photos Page</title>
+{% endblock title%} 
+
+{% block content%}
+<div class="container-fluid bg-lightp-5">
+
+    <div class="row mt-3">
+        <div class="col-md-6 mx-auto">
+        
+           <div class="class_head_gallary">
+               <h3 class="text-center ">{{uploaded_by.get_full_name}} Photos</h3>
+           </div>
+        
+        </div>   
+    </div>
+
+    <div class="row mt-3">
+       {% for i in user_photos %}
+        <div class="col-md-3">
+            <div class="gallary_img mb-4">
+                <img src="{{i.gallary.url}} " alt="" >
+            </div>
+            <p></p>
+        </div>
+       {% endfor %}
+        
+
+    </div>
+
+</div>
+
+
+{% endblock content%}

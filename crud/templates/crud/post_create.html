@@ -1,0 +1,44 @@
+{% extends 'crud/base.html'%}
+
+{% block title%}
+<title>Dashboard Page</title>
+{% endblock title%} 
+
+{% block content%}
+<div class="container-fluid mt-2 mb-2">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h3 class="alert alert-primary text-center">Create/Upadate Post</h3>
+              <form action="" method="POST" enctype="multipart/form-data">
+                  {%csrf_token%}
+                   {{form|safe}}
+                   {{form.media}}
+                   <input type="submit" class="btn btn-primary px-5 mt-3" value="SAVE POST">
+              </form>
+        </div>
+    </div>
+</div>
+{% endblock content%}   
+
+{% block js%}
+<!-- <script>
+    tinymce.init({
+      selector: '#id_content',
+      plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'table emoticons template paste help'
+    ],
+    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+      'bullist numlist outdent indent | link image | print preview media fullpage | ' +
+      'forecolor backcolor emoticons | help',
+    menu: {
+      favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
+    },
+    menubar: 'favs file edit view insert format tools table help',
+    content_css: 'css/content.css'
+    });
+  </script> -->
+
+{% endblock js%}
+

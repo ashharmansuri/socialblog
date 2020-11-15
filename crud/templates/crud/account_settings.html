@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/account_settings.css' %}">
+    
+   
+    <title>Account Settings Page</title>
+   
+
+</head>
+<body>
+    {% include 'crud/navbar.html' %}   
+     
+    {% for message in messages %}
+    <div class="cust_alert alert alert-{{ message.tags }} alert-dismissible mb-0 fade show" role="alert">
+        <strong>{{ message }}</strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+
+
+    <div class="container mt-1">
+        <h3 class="alert alert-secondary text-center">Account-Settings</h3>
+        <div class="row">
+            <div class="col-lg-4 pb-5">
+                <!-- Account Sidebar-->
+                <div class="author-card pb-3">
+                    <div class="author-card-cover" style="background-image: url({{request.user.profile.cover.url}});"></div>
+                    <div class="author-card-profile">
+                        <div class="author-card-avatar"><img src="{{request.user.profile.pro_image.url}}" alt="Daniel Adams">
+                        
+                        </div>
+                        <div class="author-card-details mt-4">
+                            <h4 class="author-card-name text-capitalize mb-2">{{request.user.get_full_name}}</h4><span class="author-card-position">Joined {{request.user.date_joined}}</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="wizard">
+                    <nav class="list-group list-group-flush">
+                        <a class="list-group-item" href="{% url 'user-profile' request.user.id %}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Profile</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="{% url 'photos-gallary' %}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Photo Gallary</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Followers</div>
+                                </div><span class="badge badge-info">6</span>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Following</div>
+                                </div><span class="badge badge-info">6</span>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Account-Settings</div>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- <a class="list-group-item" href="">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-tag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Password Change</div>
+                                </div>
+                            </div>
+                        </a> -->
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fe-icon-tag mr-1 text-muted"></i>
+                                    <button class="modelpassword_btn btn btn-default d-inline-block font-weight-medium text-uppercase" data-toggle="modal" data-target="#passwordModal">Modal Password Change</button>
+                                </div>
+                            </div>
+                        </div>
+                       
+            
+                    </nav>
+                   
+                </div>
+                
+            </div>
+            <!-- Profile Settings-->
+            <div class="col-lg-8 pb-5">
+              
+               <div class="row d-flex justify-content-between">
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h3 class="text-capitalize">
+                                        {{request.user.get_full_name}}
+                                    </h3>
+                                    <h5 class="text-primary">
+                                        {{request.user.profile.works}}
+                                    </h5>
+                                    
+                        
+                        </div>
+                    </div>  
+                    <div class="col-md-4">
+                        <button class="btn btn-primary px-5" id="open_btn">Edit Profile</button>
+                    </div> 
+                    <div class="col-md-10 mt-4">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-items" role="presentation">
+                              <a class="nav-links px-5 active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content profile-tab mt-3" id="myTabContent">
+                        
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="lab_head">User Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="lab_value">{{request.user.username}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="lab_head">Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="lab_value">{{request.user.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="lab_head">Qualification</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="lab_value">{{request.user.profile.education}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="lab_head">Date Of Birth</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="lab_value">{{request.user.profile.birthday}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="lab_head">Bio</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="lab_value_bio">{{request.user.profile.bio}}</p>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                          
+                          </div>
+                    </div>
+               </div>
+                
+                <!--end col-log-8-->          
+            </div>
+        </div>
+
+
+         <!-- update modal-->
+          <div class="update_modal">
+              <div class="modal_body">
+                <div class="close_modal"><i class="fa fa-times-circle text-danger"></i></div>
+                <h3 class="text-center py-2 text-primary mt-4">Update Your Information</h3>
+                <form class="row" method="POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                     <div class="col-md-12">
+                         <div class="form-group">
+                             <label for="account-phone">User Name</label>
+                             {{user_form.username}}
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="account-fn">First Name</label>
+                             {{user_form.first_name}}
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="account-ln">Last Name</label>
+                             {{user_form.last_name}}
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="account-email">E-mail Address</label>
+                             {{user_form.email}}
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="account-phone">Date Of Birth</label>
+                             {{profile_form.birthday}}
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="account-works">works</label>
+                             {{profile_form.works}}
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="account-education">Education</label>
+                             {{profile_form.education}}
+                         </div>
+                     </div>
+                     <div class="col-md-4">
+                         <div class="form-group">
+                             <label for="account-pass">Profile Image</label>
+                             {{profile_form.pro_image}}
+                         </div>
+                     </div>
+                     <div class="col-md-4">
+                         <div class="form-group">
+                             <label for="account-pass">Cover</label>
+                             {{profile_form.cover}}
+                         </div>
+                     </div>
+                     <div class="col-md-4">
+                         <div class="form-group">
+                             <label for="account-pass">Photos</label>
+                             {{profile_form.photo_gallary}}
+                         </div>
+                     </div>
+                     <div class="col-md-12">
+                         <div class="form-group">
+                             <label for="account-confirm-pass">Bio</label>
+                             {{profile_form.bio}}
+                         </div>
+                     </div>
+                     <div class="col-12">
+                         <hr class="mt-2 mb-3">
+                         <div class="d-flex flex-wrap justify-content-start align-items-center">
+                             
+                             <input type="submit" class="btn btn-outline-info px-5" name="submit_pro_form" value="Update Info">
+                         </div>
+                     </div>
+                 </form>
+              </div>
+          </div>
+         <!-- end update model-->
+         
+
+<!--Start password change model -->
+<div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Password Change Form</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="POST">
+                {%csrf_token%}
+                {% for form in pass_form%}
+                  {{form.label_tag}} {{form}}  {{form.errors|striptags}}
+                {% endfor %}
+                <input type="submit" class="btn btn-info btn-block mt-3" name="submit_pass_form" value="Confirm">
+            </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+ <!--end password change model-->
+
+    </div>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+
+<script>
+    
+    document.getElementById('open_btn').addEventListener('click',function(){
+                document.querySelector('.update_modal').style.display ='flex';
+             });
+
+             document.querySelector('.close_modal').addEventListener('click',function(){
+                document.querySelector('.update_modal').style.display ='none';
+             });
+</script>
+
+
+</body>
+</html>

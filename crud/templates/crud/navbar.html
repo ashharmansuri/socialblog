@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand text-primary font-weight-bold text-uppercase" href="{% url 'home' %}">Social Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}">Feed Back</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+      </li>
+      {% endif%}
+    </ul>
+
+    {% if user.is_authenticated %}
+    <form class="form-inline"  action="{% url 'post-search' %}">
+      <input class="form-control mr-2" type="search" placeholder="Search"  name="search-query">
+      <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    {% endif%}
+
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+      <span class="nav.item nav-link text-capitalize text-primary" style="font-weight: 500;font-size: 20px;">Welcome ! {{request.user.username}}</span>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-power-off"></i> Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Sign-Up</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {% endif%}
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,61 @@
+{% extends 'crud/base.html'%}
+
+{% block title%}
+<title>Home Page</title>
+{% endblock title%} 
+
+{% block content%}
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="my-3"><i>Search Results :-</i></h3>
+            {% if posts|length < 1 %}
+            <p class="suggestion">No data found related to search - &nbsp;<b>{{search_query}}</b></p>
+            <p class="suggestion">suggestions:</p>
+            <ul>
+                <li>Make sure that all words are spelled correctly.</li>
+                <li>Try different keywords.</li>
+                <li>Try more general keywords.</li>
+            </ul>
+            {% endif%}
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="post-list">
+            {%for post in posts%}
+            <div class="row mb-3 border py-3">
+                <div class="col-sm-1">
+                    <div class="picture">
+                        <img alt="Opt wizard thumbnail" src="{{post.author.profile.pro_image.url}}">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <h4>
+                        <a hre="#" class="username text-capitalize">{{post.author}}</a>
+                        <label class="label text-capitalize bg-secondary text-white p-1">#{{ post.title}}</label>
+                    </h4>
+                    <h5> 
+                    <i class="far fa-calendar-alt"></i>
+                    {{post.timestamp}}
+                    </h5>
+                    <p class="description">{{post.short_description }}</p>    
+                </div>
+                <div class="col-sm-2" data-no-turbolink="">
+                    <a class="btn btn-primary btn-download btn-round pull-right makeLoading" href="{% url 'post-detail' post.id%}">
+                    <i class="fa fa-share"></i> Read More..
+                    </a>            
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        
+    
+    </div>
+</div>
+ 
+   
+ 
+{% endblock content%}   
+   

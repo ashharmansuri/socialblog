@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+    
+   
+    <title>User Profile Page</title>
+   
+
+</head>
+<body>
+    {% include 'crud/navbar.html' %} 
+        
+    
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="profile clearfix">                            
+                <div class="image">
+                    <img src="{{user_info.profile.cover.url}}" class="img-cover">
+                </div>                            
+                <div class="user clearfix">
+                    <div class="avatar">
+                        <img src="{{user_info.profile.pro_image.url}}" class="img-profile">
+                    </div>                                
+                    <h2 class="text-capitalize">{{user_info.get_full_name}}</h2>                           
+                    <div class="actions">
+                        <div class="btn-group">
+                            <a href="{% url 'user-photos-gallary' user_info.id %}" class="btn btn-primary px-4"><i class="fas fa-images"></i> Photos</a>
+                            <button type="button" class="btn btn-primary px-3"><i class="fas fa-user-friends"></i> Add Friend</button>
+                           
+                        </div>
+                    </div>                                                                                                
+                </div>                          
+                <div class="info">
+                    <p> <i class="fas fa-briefcase"></i> <span class="title">Joined</span> {{user_info.date_joined|date:"F, Y"}}</p>
+                    <p> <i class="fa fa-graduation-cap"></i> <span class="title">Education:</span>  {{user_info.profile.education}}</p>                                    
+                    <p> <i class="fas fa-birthday-cake"></i> <span class="title">Date of birth:</span> {{user_info.profile.birthday}}</p>                                
+                    <p> <i class="fas fa-briefcase"></i> <span class="title">Work as:</span> {{user_info.profile.works}}</p>
+                </div>                              
+            </div>
+            
+        </div>
+    </div>  
+
+    <!--image The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- The Close Button -->
+    <span class="close">&times;</span>
+  
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img01">
+  
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+  </div>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<scrip src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></scrip>  
+
+<script src="{% static 'js/custom.js' %}"> </script>
+
+
+</body>
+</html>

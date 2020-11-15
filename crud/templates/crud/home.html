@@ -1,0 +1,107 @@
+{% extends 'crud/base.html'%}
+
+{% block title%}
+<title>Home Page</title>
+{% endblock title%} 
+
+{% block content%}
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row mt-4 ">
+        <div class="post-list">
+            {% for obj in qs %}
+            <div class="row mb-3 border py-3 bg-post">
+                <div class="col-sm-1">
+                    <div class="picture">
+                        <img alt="Opt wizard thumbnail" src="{{obj.author.profile.pro_image.url}}">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <h4>
+                        <a class="username text-capitalize" href="{% url 'user-profile' obj.author.id%}">{{obj.author}}</a>
+                        <label class="label text-capitalize bg-secondary text-white p-1">#{{ obj.title}}</label>
+                    </h4>
+                    <h5> 
+                    <i class="far fa-calendar-alt"></i>
+                    {{obj.timestamp|timesince}} ago
+                    </h5>
+                    <p class="description">{{obj.short_description }}</p>  
+                   
+                    
+                </div>
+                <div class="col-sm-2" data-no-turbolink="">
+                    <a class="btn btn-primary btn-download btn-round pull-right makeLoading" href="{% url 'post-detail' obj.id%}">
+                    <i class="fa fa-share"></i> Read More..
+                    </a>            
+                </div>
+
+                <!-- <div class="display d-flex justify-content-around align-items-center w-100 p-3">
+                   
+                    
+                </div>
+             -->
+
+                <div class="like_comment_section d-flex justify-content-around align-items-center w-100 p-2">
+                  
+                        <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value={{obj.id}}>
+                            
+                            <span class="mr-5">
+                                {{obj.num_likes}} Like{{obj.num_likes|pluralize}}
+                            </span>  <button type="submit" class="btn btn-light px-4 like-btn">
+                                    {% if profile not in obj.liked.all %}
+                                    <i class="far fa-thumbs-up"></i>
+                                    {% else %}
+                                    <i class="far fa-thumbs-up" style="color:#007bff"></i> <span style="color:#007bff"></>
+                                    {% endif%}
+                                </button>
+                        
+                        </form>
+                        
+                        
+                   
+                    <button  class="cmt_btn btn btn-light px-4 " id="{{obj.id}}">
+                             <i class="far fa-comment-alt"></i>   
+                             {{obj.num_comments}} Comment{{obj.num_comments|pluralize}}
+                    </button>
+
+                    <div><i class="far fa-share-square"></i> Share</div>
+                </div>
+                <div class="comment-box mt-2">
+                    {% if obj.comment_set.all %}
+                    {% for c in obj.comment_set.all%}
+
+                    <div class="comment_ind">
+                        <img class="cmt_img" src="{{c.user.pro_image.url}}" width="50" height="50">
+                        <span class="text-capitalize font-weight-bold ml-3">{{ c.user }}</span> <span class="text-muted">{{c.created}}</span>
+                        <div class='text_comment mt-2'>{{ c.body }}</div>
+                    </div>
+                   
+                    {% endfor%}
+                    {% endif%}
+                </div>
+                <form action="" method="POST" id="comment_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{obj.id}}">
+                    {{form}}
+                    <button type="submit" class="btn btn-primary px-5 mt-2">Send <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+
+            </div>
+
+            
+            {%endfor%}
+          
+        </div>
+        
+        
+    
+    </div>
+</div>
+ 
+   
+ 
+{% endblock content%}   
+   

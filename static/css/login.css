@@ -1,0 +1,56 @@
+form#loginForm {
+    -webkit-box-shadow: 2px 0px 10px 0px rgba(0,0,0, 0.75);
+-moz-box-shadow: 2px 0px 10px 0px rgba(0,0,0, 0.75);
+box-shadow: 2px 0px 10px 0px rgba(0,0,0, 0.75);
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.container-fluid.w {
+    width: 100%;
+    height: 92vh!important;
+    background: #9e9e9e14!important;
+}
+.row {
+    height: 92vh!important;
+}
+input#exampleInputEmail1,input#exampleInputPassword1 {
+    padding: 24px;
+}
+p.login_text {
+    font-size: 22px;
+    font-weight: 500;
+}
+a.nav-link {
+    margin-left: 25px!important;
+    color: gray!important;
+    font-size: 16px!important;
+}
+a.dropdown-item {
+    font-size: larger;
+    font-weight: bold;
+    color: gray;
+    text-transform: capitalize;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  a.nav-link {
+    font-weight: 500;
+    font-size: 18px!important;
+    text-transform: uppercase;
+    position: relative;
+    /* position: absolute; */
+  }
+  
+  a.nav-link::before {
+    content: '';
+    position: absolute;
+    background: goldenrod;
+    height: 3px;
+    width: 0%;
+    bottom: 0;
+    transition: 0.5s linear;
+  }
+  li.nav-item {
+    margin-left: 20px;
+  }
