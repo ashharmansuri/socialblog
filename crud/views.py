@@ -319,3 +319,4 @@ def User_Logout(request):
     logout(request)
     messages.info(request, 'You are logged out succesfully')
     return redirect('login')
+

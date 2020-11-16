@@ -26,6 +26,7 @@ urlpatterns = [
     
     path('contact',views.ContactView,name='contact'),
 
+
     # path('register',views.User_Registration,name='register'),
     path('',views.User_Login_Register,name='login'),
     path('logout',views.User_Logout,name='logout'),
