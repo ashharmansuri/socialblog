@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required(login_url='login')
 def  home(request):
     form = CommentForm()
     qs = Post.objects.all().order_by('-timestamp') 
@@ -38,7 +39,7 @@ def  home(request):
     }  
     return render(request,'crud/home.html',context)
 
-
+@login_required(login_url='login')
 def like_unlike_post(request):
     user=request.user
     if request.method == "POST":
@@ -84,6 +85,7 @@ def like_unlike_post(request):
 #         context = super().get_context_data(*args,**kwargs)
 #         context['latest_post']= self.model.objects.all().order_by('-timestamp')[:5]
 #         return context
+@login_required(login_url='login')
 def PostDetailView(request,pk):
     post = Post.objects.get(id=pk)
     latest_post = Post.objects.all().order_by('-timestamp')[0:5]
@@ -131,7 +133,7 @@ def PostDeleteView(request,pk):
     return redirect('dashboard')
 
 
-
+@login_required(login_url='login')
 def PostSearchView(request):
     search_query = request.GET.get('search-query')
     print(search_query)
@@ -182,6 +184,9 @@ def ContactView(request):
 #     context ={'user_form':user_form,'profile_form':profile_form,'pass_form':form}
 #     return render(request,'crud/account_settings.html',context)
 
+
+
+@login_required(login_url='login')
 def Account_Settings(request):
     
     # initials
@@ -224,7 +229,7 @@ def Account_Settings(request):
     return render(request,'crud/account_settings.html',context)
 
 
-
+@login_required(login_url='login')
 def photos_gallary(request):
     user_images = Photo.objects.filter(uploaded_by = request.user)
     gallary_form = GallaryForm()
@@ -242,7 +247,7 @@ def photos_gallary(request):
     # print(user_images)
     return render(request,'crud/upload_photos.html',context)
 
-
+@login_required(login_url='login')
 def user_photos_gallary(request,pk):
   images = Photo.objects.filter(uploaded_by = pk)
   context ={'user_photos':images}
@@ -281,20 +286,13 @@ def User_Profile(request,pk):
 #     return render(request,'crud/password_change.html',context)
 
 
-def User_Registration(request):
+
+
+def User_Login_Register(request):
+    #initials
     fm = UserRegisterationForm()
-    if request.method == 'POST':
-        fm = UserRegisterationForm(request.POST)
-        if fm.is_valid():
-            fm.save()
-            messages.success(request, 'User has been registered succesfully')
-            return redirect('login')
-    context ={'form':fm}
-    return render(request,'accounts/register.html',context)
 
-
-def User_Login(request):
-    if request.method =='POST':
+    if "submit_login_form" in request.POST:
         username= request.POST.get('username')
         password= request.POST.get('password')
         
@@ -302,9 +300,19 @@ def User_Login(request):
         if user is not None:
             login(request,user)
             messages.success(request, 'You are logged in succesfully')
-            return redirect('dashboard')
-            
-    return render(request,'accounts/login.html')    
+            return redirect('home')
+    
+    if "submit_register_form" in request.POST:
+        fm = UserRegisterationForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            fm = UserRegisterationForm()
+            messages.success(request, 'User has been registered succesfully')
+            return redirect('login')    
+
+    context ={'form':fm} 
+
+    return render(request,'accounts/login_register.html',context)    
 
 
 def User_Logout(request):

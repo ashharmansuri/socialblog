@@ -5,7 +5,7 @@ from .import views
 
 urlpatterns = [
     
-    path('',views.home,name='home'),
+    path('home',views.home,name='home'),
     path('post-like/',views.like_unlike_post,name='post-like-view'),
     
     path('contact',views.ContactView,name='contact'),
@@ -26,7 +26,7 @@ urlpatterns = [
     
     path('contact',views.ContactView,name='contact'),
 
-    path('register',views.User_Registration,name='register'),
-    path('login',views.User_Login,name='login'),
+    # path('register',views.User_Registration,name='register'),
+    path('',views.User_Login_Register,name='login'),
     path('logout',views.User_Logout,name='logout'),
 ]

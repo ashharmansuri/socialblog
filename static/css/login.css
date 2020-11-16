@@ -11,7 +11,7 @@ box-shadow: 2px 0px 10px 0px rgba(0,0,0, 0.75);
     height: 92vh!important;
     background: #9e9e9e14!important;
 }
-.row {
+.row.login_row {
     height: 92vh!important;
 }
 input#exampleInputEmail1,input#exampleInputPassword1 {
@@ -45,12 +45,19 @@ a.dropdown-item {
   a.nav-link::before {
     content: '';
     position: absolute;
-    background: goldenrod;
+    background: #007bff;
     height: 3px;
     width: 0%;
     bottom: 0;
     transition: 0.5s linear;
   }
+  li.nav-item:hover a.nav-link::before{
+    width:90%;
+  }
   li.nav-item {
     margin-left: 20px;
   }
+  /**register form**/
+  input#id_username,input#id_first_name,input#id_last_name,input#id_email,input#id_password1,input#id_password2  {
+    padding: 25px;
+}

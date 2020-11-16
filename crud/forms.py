@@ -6,17 +6,17 @@ from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 import datetime
 
 class UserRegisterationForm(UserCreationForm):
-    password1=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter Password'}))
-    password2=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Re-Enter Password'}))
+    password1=forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Enter Password'}))
+    password2=forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Re-Enter Password'}))
     joined_date = datetime.datetime.now()
     class Meta:
         model=User
         fields =['username','email','first_name','last_name']
         widgets ={
-             'username':forms.TextInput(attrs={'placeholder':'Enter Username'}),
-             'first_name':forms.TextInput(attrs={'placeholder':'Enter First Name'}),
-             'last_name':forms.TextInput(attrs={'placeholder':'Enter Last Name'}),
-             'email':forms.TextInput(attrs={'placeholder':'Enter Email'}),
+             'username':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Username'}),
+             'first_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter First Name'}),
+             'last_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Last Name'}),
+             'email':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Email'}),
              }
 
 class PostCreateForm(forms.ModelForm):
