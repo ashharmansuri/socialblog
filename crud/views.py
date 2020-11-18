@@ -97,7 +97,7 @@ def PostDetailView(request,pk):
         form = CommentForm()
         return redirect('post-detail',pk=pk)
 
-    context ={'post':post,'latest_post':latest_post,'form':form}
+    context ={'obj':post,'latest_post':latest_post,'form':form}
     return render(request,'crud/post_detail.html',context)
 
 

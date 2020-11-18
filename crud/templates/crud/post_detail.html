@@ -12,23 +12,23 @@
             <div class="col-lg-9 m-15px-tb">
                 <article class="article">
                     <div class="article-img">
-                        <img src="{{post.post_image.url}}" title="" alt="">
+                        <img src="{{obj.post_image.url}}" title="" alt="">
                     </div>
                     <div class="article-title">
                         <!-- <h6><a href="#">Lifestyle</a></h6> -->
-                        <h2>{{post.title}}</h2>
+                        <h2>{{obj.title}}</h2>
                         <div class="media">
                             <div class="avatar">
-                                <img src="{{post.author.profile.pro_image.url}}" title="" alt="">
+                                <img src="{{obj.author.profile.pro_image.url}}" title="" alt="">
                             </div>
                             <div class="media-body">
-                                <label class="text-capitalize name_label">{{post.author.get_full_name}}</label>
-                                <span>Posted On {{post.timestamp}}</span>
+                                <label class="text-capitalize name_label">{{obj.author.get_full_name}}</label>
+                                <span>Posted On {{obj.timestamp}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="article-content">
-                        <p  class="text-justify post_detail_text">{{post.content| safe}}</p>
+                        <p  class="text-justify post_detail_text">{{obj.content| safe}}</p>
                     </div>
                     <!-- <div class="nav tag-cloud">
 
@@ -42,12 +42,12 @@
                     </div> -->
                     <div class="d-flex justify-content-around">
                         <span class="mr-5">
-                            {{post.num_likes}} Like{{post.num_likes|pluralize}}
+                            {{obj.num_likes}} Like{{obj.num_likes|pluralize}}
                         </span>  
 
                         <span class=" px-4 " id="">
                             <i class="far fa-comment-alt"></i>   
-                            {{post.num_comments}} Comment{{post.num_comments|pluralize}}
+                            {{obj.num_comments}} Comment{{obj.num_comments|pluralize}}
                         </span>
 
                     </div>
@@ -55,22 +55,22 @@
                   
                 <div class="like_comment_section d-flex justify-content-around align-items-center w-100 p-2">
                   
-                    <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{post.id}}'>
+                    <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
                         {% csrf_token %}
-                        <input type="hidden" name="post_id" value={{post.id}}>
+                        <input type="hidden" name="post_id" value={{obj.id}}>
                         
                         <button type="submit" class="btn btn-light px-4 like-btn">
-                                {% if profile not in post.liked.all %}
+                                {% if profile not in obj.liked.all %}
                                 <i class="far fa-thumbs-up"></i>
                                 {% else %}
-                                <i class="far fa-thumbs-up" style="color:#007bff"></i> 
+                                <i class="far fa-thumbs-up" style="color:blue"></i>
                                 {% endif%}
                         </button>
                     
                     </form>
                     
                     
-                    <button  class="cmt_btn btn btn-light px-4 " id="{{post.id}}">
+                    <button  class="cmt_btn btn btn-light px-4 " id="{{obj.id}}">
                         <i class="far fa-comment-alt"></i>   
                         Comment
                     </button>
@@ -88,14 +88,14 @@
                 
                 <form action="" method="POST" id="comment_form">
                     {% csrf_token %}
-                    <input type="hidden" name="post_id" value="{{post.id}}">
+                    <input type="hidden" name="post_id" value="{{obj.id}}">
                     {{form}}
                     <button type="submit" class="btn btn-primary px-5 mt-2">Send <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
                 <div class="comment-box mt-2">
-                    {% if post.comment_set.all %}
-                    {% for c in post.comment_set.all%}
+                    {% if obj.comment_set.all %}
+                    {% for c in obj.comment_set.all%}
 
                     <div class="comment_ind">
                         <img class="cmt_img" src="{{c.user.pro_image.url}}" width="50" height="50">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <!-- End Author -->
-                <!-- Trending Post -->
+                <!-- Trending obj -->
                 <!-- <div class="widget widget-post">
                     <div class="widget-title">
                         <h3>Trending Now</h3>
