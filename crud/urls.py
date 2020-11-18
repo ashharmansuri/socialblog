@@ -6,16 +6,16 @@ from .import views
 urlpatterns = [
     
     path('home',views.home,name='home'),
-    path('post-like/',views.like_unlike_post,name='post-like-view'),
+    path('post-like',views.like_unlike_post,name='post-like-view'),
     
     path('contact',views.ContactView,name='contact'),
     path('post-detail/<int:pk>',views.PostDetailView,name='post-detail'),
-    # path('post-detail/<int:pk>',views.PostDetailView.as_view(),name='post-detail'),
+   
     path('post-create',views.PostCreateView,name='post-create'),
     path('post-edit/<int:pk>',views.PostUpdateView,name='post-update'),
     path('post-delete/<int:pk>',views.PostDeleteView,name='post-delete'),
     path('post-search',views.PostSearchView,name='post-search'),
-    # path('post-like/',views.like_unlike_post,name='post-like-view'),
+    # path('post-like/<int:post_id>',views.like_unlike_post,name='post-like-view'),
     
     path('account-settings',views.Account_Settings,name='account-settings'),
     path('dashboard',views.Dashboard,name='dashboard'),

@@ -16,26 +16,23 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='login')
 def  home(request):
-    form = CommentForm()
+    # form = CommentForm()
     qs = Post.objects.all().order_by('-timestamp') 
-    profile = Profile.objects.get(user=request.user)
+    # profile = Profile.objects.get(user=request.user)
 
     
-    if request.method=='POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user=profile
-            instance.post = Post.objects.get(id=request.POST.get('post_id'))
-            instance.save()
-        form = CommentForm()
+    # if request.method=='POST':
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         instance = form.save(commit=False)
+    #         instance.user=profile
+    #         instance.post = Post.objects.get(id=request.POST.get('post_id'))
+    #         instance.save()
+    #     form = CommentForm()
        
    
     context={
-        'qs':qs,
-        'profile':profile,
-        'form':form,
-    
+        'qs':qs
     }  
     return render(request,'crud/home.html',context)
 
@@ -45,20 +42,15 @@ def like_unlike_post(request):
     if request.method == "POST":
         post_id = request.POST.get('post_id')
         print('post_id',post_id)
-    
         post_obj = Post.objects.get(id=post_id)
         print(post_obj)
-
         profile = Profile.objects.get(user=user)
         print(profile)
-
         if profile in post_obj.liked.all():
             post_obj.liked.remove(profile)
         else:
             post_obj.liked.add(profile)
-
         like,created = Like.objects.get_or_create(user=profile,post_id=post_id)
-
         if not created:
             if like.value=='Like':
                 like.value='Unlike'
@@ -69,9 +61,10 @@ def like_unlike_post(request):
 
         post_obj.save()
         like.save()   
-
-    return redirect('home')
-    # return redirect('post-detail',mypost_id.pk)
+    # return redirect('post-detail') 
+    return redirect('post-detail',pk=post_id)
+    # return redirect('home')
+    
 
 
 
@@ -85,11 +78,26 @@ def like_unlike_post(request):
 #         context = super().get_context_data(*args,**kwargs)
 #         context['latest_post']= self.model.objects.all().order_by('-timestamp')[:5]
 #         return context
+
 @login_required(login_url='login')
 def PostDetailView(request,pk):
+    form = CommentForm()
     post = Post.objects.get(id=pk)
     latest_post = Post.objects.all().order_by('-timestamp')[0:5]
-    context ={'post':post,'latest_post':latest_post}
+
+    profile = Profile.objects.get(user=request.user)
+
+    if request.method=='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user=profile
+            instance.post = Post.objects.get(id=request.POST.get('post_id'))
+            instance.save()
+        form = CommentForm()
+        return redirect('post-detail',pk=pk)
+
+    context ={'post':post,'latest_post':latest_post,'form':form}
     return render(request,'crud/post_detail.html',context)
 
 

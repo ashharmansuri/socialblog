@@ -42,14 +42,14 @@
              -->
 
                 <div class="like_comment_section d-flex justify-content-around align-items-center w-100 p-2">
-                  
-                        <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
+                    <span class="mr-5">
+                        {{obj.num_likes}} Like{{obj.num_likes|pluralize}}
+                    </span>
+                        <!-- <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
                             {% csrf_token %}
                             <input type="hidden" name="post_id" value={{obj.id}}>
                             
-                            <span class="mr-5">
-                                {{obj.num_likes}} Like{{obj.num_likes|pluralize}}
-                            </span>  <button type="submit" class="btn btn-light px-4 like-btn">
+                             <button type="submit" class="btn btn-light px-4 like-btn">
                                     {% if profile not in obj.liked.all %}
                                     <i class="far fa-thumbs-up"></i>
                                     {% else %}
@@ -57,18 +57,18 @@
                                     {% endif%}
                                 </button>
                         
-                        </form>
+                        </form> -->
                         
                         
                    
-                    <button  class="cmt_btn btn btn-light px-4 " id="{{obj.id}}">
+                    <span  class=" px-4 " id="">
                              <i class="far fa-comment-alt"></i>   
                              {{obj.num_comments}} Comment{{obj.num_comments|pluralize}}
-                    </button>
+                    </span>
 
-                    <div><i class="far fa-share-square"></i> Share</div>
+                    
                 </div>
-                <div class="comment-box mt-2">
+                <!-- <div class="comment-box mt-2">
                     {% if obj.comment_set.all %}
                     {% for c in obj.comment_set.all%}
 
@@ -87,7 +87,7 @@
                     {{form}}
                     <button type="submit" class="btn btn-primary px-5 mt-2">Send <i class="fas fa-paper-plane"></i>
                     </button>
-                </form>
+                </form> -->
 
             </div>
 
