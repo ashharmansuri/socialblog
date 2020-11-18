@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.urls import reverse
 from .models import Post,Profile,Photo,Like
 from django.contrib.auth.models import User
-from .forms import UserRegisterationForm,PostCreateForm,UserUpdateForm,ProfileForm,UserPasswordForm,GallaryForm,CommentForm
+from .forms import PostCreateForm,UserUpdateForm,ProfileForm,UserPasswordForm,GallaryForm,CommentForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 # from django.views.generic.edit import CreateView,UpdateView,DeleteView
@@ -298,7 +298,7 @@ def User_Profile(request,pk):
 
 def User_Login_Register(request):
     #initials
-    fm = UserRegisterationForm()
+    
 
     if "submit_login_form" in request.POST:
         username= request.POST.get('username')
@@ -311,16 +311,27 @@ def User_Login_Register(request):
             return redirect('home')
     
     if "submit_register_form" in request.POST:
-        fm = UserRegisterationForm(request.POST)
-        if fm.is_valid():
-            fm.save()
-            fm = UserRegisterationForm()
-            messages.success(request, 'User has been registered succesfully')
-            return redirect('login')    
+    #     # fm = UserRegisterationForm(request.POST)
+    #     # if fm.is_valid():
+    #     #     fm.save()
+    #     #     fm = UserRegisterationForm()
+    #     #     messages.success(request, 'User has been registered succesfully')
+    #     #     return redirect('login') 
+        username = request.POST.get('username')
+        fname = request.POST.get('first_name')
+        lname = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
 
-    context ={'form':fm} 
+        print(username,fname,lname,email,password1)   
+        user = User.objects.create_user(username=username,first_name=fname,last_name=lname,email=email,password=password1)
+        user.save()
+        messages.success(request,'Your Account Has Been Create Succesfully')
+        return redirect('login')
+    # # context ={'form':fm} 
 
-    return render(request,'accounts/login_register.html',context)    
+    return render(request,'accounts/login_register.html')    
 
 
 def User_Logout(request):

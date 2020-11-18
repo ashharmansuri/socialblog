@@ -67,30 +67,30 @@
         <div class="container">
           <div class="row" style="height: auto;">
             <div class="col-md-12">
-              <form act method="POST">
+              <form  method="POST">
             
                   {% csrf_token %}
                  
                   <div class="form-group">
-                      {{form.username}}
+                      <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Enter Username">
                   </div>
             
                   <div class="form-row">
                       <div class="form-group col-md-6">
-                        {{form.first_name}}
+                        <input type="text" class="form-control" name="first_name" id="firstnameInput" placeholder="Enter First Name">
                       </div>
                       <div class="form-group col-md-6">
-                        {{form.last_name}}
+                        <input type="text" class="form-control" name="last_name" id="lastnameInput" placeholder="Enter Last Name">
                       </div>
                   </div>
                     <div class="form-group">
-                        {{form.email}}
+                      <input type="email" class="form-control" name="email" id="emailInput" placeholder="Enter Email">
                     </div>
                     <div class="form-group">
-                        {{form.password1}}
+                      <input type="password" class="form-control" name="password1" id="password1Input" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        {{form.password2}}
+                      <input type="password" class="form-control" name="password2" id="password2Input" placeholder="Confirm Password">
                     </div>
                   
                   <div class="d-flex justify-content-center">
