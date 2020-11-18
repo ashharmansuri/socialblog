@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,JsonResponse
 from django.contrib import messages
 from django.urls import reverse
 from .models import Post,Profile,Photo,Like
@@ -10,6 +10,8 @@ from django.views.generic.detail import DetailView
 # from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -295,6 +297,20 @@ def User_Profile(request,pk):
 
 
 
+@csrf_exempt
+def usernameValidationView(request):
+    if request.method=="POST":
+        data = json.loads(request.body)
+        print(data)
+        username = data['username']
+
+        if not str(username).isalnum():
+            return JsonResponse({'username_error':'username should not container number'},status=400)
+        if User.objects.filter(username=username).exists():   
+             return JsonResponse({'username_error':'username is taken already'},status=409)
+        return JsonResponse({'username_valid':True},status=400)    
+
+
 
 def User_Login_Register(request):
     #initials
@@ -310,26 +326,26 @@ def User_Login_Register(request):
             messages.success(request, 'You are logged in succesfully')
             return redirect('home')
     
-    if "submit_register_form" in request.POST:
-    #     # fm = UserRegisterationForm(request.POST)
-    #     # if fm.is_valid():
-    #     #     fm.save()
-    #     #     fm = UserRegisterationForm()
-    #     #     messages.success(request, 'User has been registered succesfully')
-    #     #     return redirect('login') 
-        username = request.POST.get('username')
-        fname = request.POST.get('first_name')
-        lname = request.POST.get('last_name')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+    # if "submit_register_form" in request.POST:
+    # #     # fm = UserRegisterationForm(request.POST)
+    # #     # if fm.is_valid():
+    # #     #     fm.save()
+    # #     #     fm = UserRegisterationForm()
+    # #     #     messages.success(request, 'User has been registered succesfully')
+    # #     #     return redirect('login') 
+    #     username = request.POST.get('username')
+    #     fname = request.POST.get('first_name')
+    #     lname = request.POST.get('last_name')
+    #     email = request.POST.get('email')
+    #     password1 = request.POST.get('password1')
+    #     password2 = request.POST.get('password2')
 
-        print(username,fname,lname,email,password1)   
-        user = User.objects.create_user(username=username,first_name=fname,last_name=lname,email=email,password=password1)
-        user.save()
-        messages.success(request,'Your Account Has Been Create Succesfully')
-        return redirect('login')
-    # # context ={'form':fm} 
+    #     print(username,fname,lname,email,password1)   
+    #     user = User.objects.create_user(username=username,first_name=fname,last_name=lname,email=email,password=password1)
+    #     user.save()
+    #     messages.success(request,'Your Account Has Been Create Succesfully')
+    #     return redirect('login')
+    
 
     return render(request,'accounts/login_register.html')    
 
