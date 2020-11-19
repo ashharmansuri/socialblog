@@ -31,7 +31,7 @@ emailInput.addEventListener('keyup',(e)=>{
 
        // api clearInterval
    if(emailVal.length>0){
-    fetch("/validate-email",{
+    fetch('/validate-email',{
         body:JSON.stringify({email : emailVal}),
         method:"POST",
  
@@ -67,7 +67,7 @@ usernameInput.addEventListener('keyup', (e)=>{
 
    // api clearInterval
    if(usernameVal.length>0){
-   fetch("/validate-username",{
+   fetch('/validate-username',{
        body:JSON.stringify({username : usernameVal}),
        method:"POST",
 
