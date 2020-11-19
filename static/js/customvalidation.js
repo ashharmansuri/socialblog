@@ -4,6 +4,22 @@ const usernamefeedBack = document.querySelector('.usernamefeedback');
 const emailfeedBack = document.querySelector('.emailfeedback');
 const emailInput = document.querySelector('#emailInput');
 const usernamesuccess = document.querySelector('.username-success-output');
+const password1Input = document.querySelector('#password1Input');
+const passtoggle = document.querySelector('.passtoggle');
+ 
+console.log(passtoggle)
+passtoggle.addEventListener('click',function(){
+   
+  if(password1Input.type ==='password'){
+    password1Input.type ='text';
+   
+  }
+  else{
+    password1Input.type ='password';
+    
+  }
+
+});
 
 emailInput.addEventListener('keyup',(e)=>{
        const emailVal = e.target.value;
