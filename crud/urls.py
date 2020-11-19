@@ -25,7 +25,8 @@ urlpatterns = [
     path('user-photos-gallary/<int:pk>',views.user_photos_gallary,name='user-photos-gallary'),
     
     path('contact',views.ContactView,name='contact'),
-
+    
+    path('validate-email',views.emailValidationView,name='validate-email'),
     path('validate-username',views.usernameValidationView,name='validate-username'),
     # path('register',views.User_Registration,name='register'),
     path('',views.User_Login_Register,name='login'),
