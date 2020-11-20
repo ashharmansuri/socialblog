@@ -354,12 +354,28 @@ def User_Login_Register(request):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
-        print(username,fname,lname,email,password1)   
-        user = User.objects.create_user(username=username,first_name=fname,last_name=lname,email=email,password=password1)
-        user.save()
-        messages.success(request,'Your Account Has Been Create Succesfully')
-        return redirect('login')
-    
+        context = {
+            'fieldValue':request.POST
+            }
+        if password1 != password2:
+            messages.error(request,'password does not match')
+            return redirect('login')    
+        if len(username)<4:
+            messages.error(request,'username must contain 4 alphanumeric')
+            return redirect('login')    
+        elif User.objects.filter(username=username).exists():
+            messages.error(request,'username is taken already')
+            return redirect('login') 
+        elif User.objects.filter(email=email).exists():
+            messages.error(request,'email is taken already')
+            return redirect('login')     
+        else:
+            print(username,fname,lname,email,password1)   
+            user = User.objects.create_user(username=username,first_name=fname,last_name=lname,email=email,password=password1)
+            user.save()
+            messages.success(request,'Your Account Has Been Create Succesfully')
+            return redirect('login')
+        
 
     return render(request,'accounts/login_register.html')    
 
