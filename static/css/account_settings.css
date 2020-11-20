@@ -308,7 +308,7 @@ button.modelpassword_btn.btn.btn-default.d-inline-block.font-weight-medium.text-
   margin-left: -13px!important;
   font-weight: 500!important;
   padding: 0 10px 0px!important;
-  opacity: 0.9!important;
+  letter-spacing: 1px;
 }
 a#home-tab {
   margin-left: -45px!important;
