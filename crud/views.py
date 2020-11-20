@@ -14,26 +14,24 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from validate_email import validate_email
 from .decorators import unauthenticated_user
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
 
 # Create your views here.
 @login_required(login_url='login')
 def  home(request):
-    # form = CommentForm()
-    qs = Post.objects.all().order_by('-timestamp') 
-    # profile = Profile.objects.get(user=request.user)
 
+    qs_list = Post.objects.all().order_by('-timestamp') 
     
-    # if request.method=='POST':
-    #     form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         instance = form.save(commit=False)
-    #         instance.user=profile
-    #         instance.post = Post.objects.get(id=request.POST.get('post_id'))
-    #         instance.save()
-    #     form = CommentForm()
-       
+    paginator= Paginator(qs_list,7)
+    page = request.GET.get('page')
+    try:
+        qs =paginator.page(page)
+    except PageNotAnInteger:
+        qs =paginator.page(1)
+    except EmptyPage:
+        qs =paginator.page(paginator.num_pages)     
    
     context={
         'qs':qs

@@ -6,7 +6,7 @@
 
 {% block content%}
 
-<div class="container bootstrap snippets bootdey">
+<div class="container bootstrap snippets">
     <div class="row mt-4 ">
         <div class="post-list">
             {% for obj in qs %}
@@ -99,6 +99,39 @@
         
     
     </div>
+
+
+
+        <div class="col-md-5 mx-auto">
+            <ul class="pagination">
+                {% if qs.has_previous %}
+               
+                    <a href="?page={{qs.previous_page_number }}" class="btn btn-outline-primary px-3">&laquo; Previous</a>
+                
+                {% endif%}
+
+                {% for obj in qs.paginator.page_range %}
+                  {% if qs.number == obj%}
+                  
+                      <a href="?page={{obj}}" class="btn btn-primary active px-3">{{obj}}</a>
+                
+                  {% else%}
+                  
+                    <a href="?page={{obj}}" class="btn btn-outline-primary px-3">{{obj}}</a>
+            
+                  {% endif%}
+                {% endfor %}
+
+               
+                {% if qs.has_next %}
+                
+                    <a href="?page={{qs.next_page_number }}" class="btn btn-outline-primary px-3">Next &raquo; </a>
+                
+                {% endif%}
+
+            </ul>
+        </div>
+
 </div>
  
    

@@ -49,7 +49,7 @@ p.description {
   float: left;
 }
 
-.post-list:after {
+/* .post-list:after {
   height: 1px;
   background: #EEEEEE;
   width: 83.3333%;
@@ -58,7 +58,7 @@ p.description {
   content: "";
   display: block;
   position: absolute;
-}
+} */
 
 .post-list .btn-download {
   margin-top: 45px;
