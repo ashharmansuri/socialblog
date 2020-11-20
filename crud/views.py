@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.views.decorators.csrf import csrf_exempt
 from validate_email import validate_email
+from .decorators import unauthenticated_user
 
 
 
@@ -275,6 +276,7 @@ def Dashboard(request):
     context = {'posts':user_post,'counts':count}
     return render(request,'crud/dashboard.html',context)
 
+@login_required(login_url='login')
 def User_Profile(request,pk):
     user = User.objects.get(id=pk)
     context ={'user_info':user}
@@ -325,7 +327,7 @@ def usernameValidationView(request):
         return JsonResponse({'username_valid':True},status=400)    
 
 
-
+@unauthenticated_user
 def User_Login_Register(request):
     #initials
     
