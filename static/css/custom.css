@@ -618,8 +618,8 @@ label.text-capitalize.name_label {
 .bg-post{
   background-color: #d3d3d338;
 }
-i.fa.fas.fa-thumbs-up {
-  font-size: 18px;
+i.fa.fas.fa-thumbs-up, i.fa.fas.comment {
+  font-size: 20px;
 }
 
 ul.pagination a {
