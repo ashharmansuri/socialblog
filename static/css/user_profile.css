@@ -149,6 +149,9 @@ span.title {
   text-decoration: none;
   cursor: pointer;
 }
+span.user_img_nav img {
+  border-radius: 50%!important;
+}
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){

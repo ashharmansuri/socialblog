@@ -625,3 +625,6 @@ i.fa.fas.fa-thumbs-up, i.fa.fas.comment {
 ul.pagination a {
   margin: 0px 5px!important;
 }
+span.user_img_nav img {
+  border-radius: 50%!important;
+}

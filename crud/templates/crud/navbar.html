@@ -28,6 +28,9 @@
 
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
+      <span class="user_img_nav">
+        <img src="{{request.user.profile.pro_image.url}}" alt="user_image" class="rounded" width="50" height="50">
+      </span>
       <span class="nav.item nav-link text-capitalize text-primary" style="font-weight: 500;font-size: 20px;">Welcome ! {{request.user.username}}</span>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-power-off"></i> Logout</a>

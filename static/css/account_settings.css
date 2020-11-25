@@ -316,6 +316,9 @@ a#home-tab {
   color: black!important;
   font-weight: 700;
 }
+h4#exampleModalLabel {
+  margin-left: 90px!important;
+}
 /***nav**/
 a.nav-link {
   font-weight: 500;
@@ -338,4 +341,7 @@ li.nav-item:hover a.nav-link::before{
 }
 li.nav-item {
   margin-left: 20px;
+}
+span.user_img_nav img {
+  border-radius: 50%!important;
 }
