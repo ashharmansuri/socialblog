@@ -628,3 +628,6 @@ ul.pagination a {
 span.user_img_nav img {
   border-radius: 50%!important;
 }
+.container-fluid.bg-lightp-5 {
+  background: #d3d3d32b;
+}
