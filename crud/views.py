@@ -85,7 +85,8 @@ def like_unlike_post(request):
             else: 
                 like.value = 'Like'   
         else:
-            like.value='Like'         
+            like.value='Like'    
+
             post_obj.save()
             like.save()    
     return redirect('post-detail',pk=post_id)
@@ -367,8 +368,11 @@ def User_Login_Register(request):
             messages.error(request,'password does not match')
             return redirect('login')    
         if len(username)<4:
-            messages.error(request,'username must contain 4 alphanumeric')
-            return redirect('login')    
+            messages.error(request,'username must contain more than 4 character')
+            return redirect('login')  
+        elif str(username).isalnum:
+            messages.error(request,'username can contain only Alphanumerical')
+            return redirect('login')       
         elif User.objects.filter(username=username).exists():
             messages.error(request,'username is taken already')
             return redirect('login') 

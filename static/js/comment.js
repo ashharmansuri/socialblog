@@ -13,17 +13,12 @@ $( document ).ready(function() {
         }  
     });
   
-// $( document ).ready(function() {
-    
-//     $(".cmt_btn").click(function () {
-      
-//         var x = document.querySelector('.comment-box');
-//   if (x.style.display === "none") {
-//     x.style.display = "block";
-//   } else {
-//     x.style.display = "none";
-//   }
-    
-//     });
+
+    $('.like-form').submit(function(e){
+         e.preventDefault
+         const post_id = $(this)
+         console.log(post_id)
+    });
+   
  });
   

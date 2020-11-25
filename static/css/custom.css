@@ -565,13 +565,13 @@ label {
 }
 /**like**/
 
-button.like-btn{
+button#like-btn{
   font-size: 20px;
   background:transparent!important;
   border:none!important;
   outline:0!important;
 }
-button.like-btn:focus,button.cmt_btn:focus {
+button#like-btn:focus,button.cmt_btn:focus {
   outline: none!important;
   box-shadow: none!important;
   background:transparent!important;
