@@ -42,32 +42,34 @@
                     </div> -->
                     <div class="d-flex justify-content-around">
                         <span class="mr-5">
-                            {{obj.num_likes}} Like{{obj.num_likes|pluralize}}
+                            {{obj.num_likes}} Like
                         </span>  
 
                         <span class=" px-4 " id="">
                             <i class="far fa-comment-alt"></i>   
-                            {{obj.num_comments}} Comment{{obj.num_comments|pluralize}}
+                            {{obj.num_comments}} Comment
                         </span>
 
                     </div>
                     <hr>
                   
                 <div class="like_comment_section d-flex justify-content-around align-items-center w-100 p-2">
-                  
-                    <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
+                 
+                 <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
                         {% csrf_token %}
                         <input type="hidden" name="post_id" value={{obj.id}}>
                         
-                        <button type="submit" class="btn btn-light px-4 like-btn">
+                        <button type="submit" class="btn btn-light px-4 like-btn id={{obj.id}}">
                                 {% if profile not in obj.liked.all %}
-                                <i class="far fa-thumbs-up"></i>
+                                  <i class="fa fas fa-thumbs-up"></i>
                                 {% else %}
-                                <i class="far fa-thumbs-up" style="color:blue"></i>
+                                  <i class="fa fas fa-thumbs-up" style="color:#007bff"></i>
                                 {% endif%}
+                                
+
                         </button>
                     
-                    </form>
+                    </form> 
                     
                     
                     <button  class="cmt_btn btn btn-light px-4 " id="{{obj.id}}">
@@ -150,21 +152,21 @@
                     </div>
                     <div class="widget-body">
                         {% for post in latest_post%}
-                        <div class="latest-post-aside media">
-                            <div class="lpa-left media-body">
+                        <div class="latest-post-aside media d-flex">
+                            <div class="lpa-left media-body w-75">
                                 <div class="lpa-title">
                                     <h5 class="text-capitalize "<a href="{% url 'post-detail' post.id%}">{{post.title}}</a></h5>
                                 </div>
                                 <div class="lpa-meta">
-                                    <a class="name" href="#">
+                                    <a class="name d-block" href="#">
                                         {{post.author}}
                                     </a>
-                                    <a class="date" href="#">
+                                    <small class="date">
                                         {{post.timestamp}}
-                                    </a>
+                                    </small>
                                 </div>
                             </div>
-                            <div class="lpa-right">
+                            <div class="lpa-right w-25>
                                 <a href="#">
                                     <img src="{{post.post_image.url}}" title="" alt="">
                                 </a>

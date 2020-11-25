@@ -536,7 +536,7 @@ a.nav-link::before {
   transition: 0.5s linear;
 }
 li.nav-item:hover a.nav-link::before{
-  width:90%;
+  width:85%;
 }
 li.nav-item {
   margin-left: 20px;
@@ -617,4 +617,11 @@ label.text-capitalize.name_label {
 }
 .bg-post{
   background-color: #d3d3d338;
+}
+i.fa.fas.fa-thumbs-up {
+  font-size: 18px;
+}
+
+ul.pagination a {
+  margin: 0px 5px!important;
 }

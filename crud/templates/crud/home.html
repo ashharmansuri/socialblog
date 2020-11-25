@@ -43,7 +43,7 @@
 
                 <div class="like_comment_section d-flex justify-content-around align-items-center w-100 p-2">
                     <span class="mr-5">
-                        {{obj.num_likes}} Like{{obj.num_likes|pluralize}}
+                        {{obj.num_likes}} Like
                     </span>
                         <!-- <form action="{% url 'post-like-view' %}" method="POST" class='like-form' id='{{obj.id}}'>
                             {% csrf_token %}
@@ -51,9 +51,9 @@
                             
                              <button type="submit" class="btn btn-light px-4 like-btn">
                                     {% if profile not in obj.liked.all %}
-                                    <i class="far fa-thumbs-up"></i>
+                                    Like
                                     {% else %}
-                                    <i class="far fa-thumbs-up" style="color:#007bff"></i> <span style="color:#007bff"></>
+                                    Unlike
                                     {% endif%}
                                 </button>
                         
@@ -63,7 +63,7 @@
                    
                     <span  class=" px-4 " id="">
                              <i class="far fa-comment-alt"></i>   
-                             {{obj.num_comments}} Comment{{obj.num_comments|pluralize}}
+                             {{obj.num_comments}} Comment
                     </span>
 
                     

@@ -21,10 +21,9 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 @login_required(login_url='login')
 def  home(request):
-
     qs_list = Post.objects.all().order_by('-timestamp') 
-    
-    paginator= Paginator(qs_list,7)
+
+    paginator= Paginator(qs_list,6)
     page = request.GET.get('page')
     try:
         qs =paginator.page(page)
@@ -38,53 +37,65 @@ def  home(request):
     }  
     return render(request,'crud/home.html',context)
 
+# @login_required(login_url='login')
+# def like_unlike_post(request):
+#     user = request.user
+#     if request.method == 'POST':
+#         post_id = request.POST.get('post_id')
+#         post_obj = Post.objects.get(id=post_id)
+#         profile = Profile.objects.get(user=user)
+
+#         if profile in post_obj.liked.all():
+#             post_obj.liked.remove(profile)
+#         else:
+#             post_obj.liked.add(profile)
+#         like, created = Like.objects.get_or_create(user=profile, post_id=post_id)
+
+#         if not created:
+#             if like.value=='Like':
+#                 like.value='Unlike'
+#             else:
+#                 like.value='Like'
+#         else:
+#             like.value='Like'
+#             post_obj.save()
+#             like.save()
+
+   
+
+
 @login_required(login_url='login')
 def like_unlike_post(request):
     user=request.user
-    if request.method == "POST":
+    if request.method=="POST":
         post_id = request.POST.get('post_id')
-        print('post_id',post_id)
         post_obj = Post.objects.get(id=post_id)
-        print(post_obj)
         profile = Profile.objects.get(user=user)
-        print(profile)
+
         if profile in post_obj.liked.all():
             post_obj.liked.remove(profile)
         else:
             post_obj.liked.add(profile)
+
         like,created = Like.objects.get_or_create(user=profile,post_id=post_id)
+
         if not created:
             if like.value=='Like':
-                like.value='Unlike'
-            else:
-                like.value='Like'
+                like.value ='Unlike'
+            else: 
+                like.value = 'Like'   
         else:
-            like.value='Like'
-
-        post_obj.save()
-        like.save()   
-    # return redirect('post-detail') 
+            like.value='Like'         
+            post_obj.save()
+            like.save()    
     return redirect('post-detail',pk=post_id)
-    # return redirect('home')
-    
 
-
-
-# class PostDetailView(DetailView):
-#     model = Post
-#     ordering =['-timestamp']
-#     template_name ='crud/post_detail.html'  
-#     context_object_name ='post'
-
-#     def get_context_data(self,*args ,**kwargs):
-#         context = super().get_context_data(*args,**kwargs)
-#         context['latest_post']= self.model.objects.all().order_by('-timestamp')[:5]
-#         return context
 
 @login_required(login_url='login')
 def PostDetailView(request,pk):
     form = CommentForm()
     post = Post.objects.get(id=pk)
+    print('mypost:',post)
     latest_post = Post.objects.all().order_by('-timestamp')[0:5]
 
     profile = Profile.objects.get(user=request.user)
@@ -99,7 +110,7 @@ def PostDetailView(request,pk):
         form = CommentForm()
         return redirect('post-detail',pk=pk)
 
-    context ={'obj':post,'latest_post':latest_post,'form':form}
+    context ={'obj':post,'latest_post':latest_post,'form':form,'profile':profile}
     return render(request,'crud/post_detail.html',context)
 
 
@@ -139,7 +150,7 @@ def PostUpdateView(request,pk):
 def PostDeleteView(request,pk):
     post = Post.objects.get(id=pk)
     post.delete()
-    messages.danger(request ,'You have deleted Your Post')
+    messages.error(request ,'You have deleted Your Post')
     return redirect('dashboard')
 
 
@@ -341,12 +352,7 @@ def User_Login_Register(request):
             return redirect('home')
     
     if "submit_register_form" in request.POST:
-    # #     # fm = UserRegisterationForm(request.POST)
-    # #     # if fm.is_valid():
-    # #     #     fm.save()
-    # #     #     fm = UserRegisterationForm()
-    # #     #     messages.success(request, 'User has been registered succesfully')
-    # #     #     return redirect('login') 
+
         username = request.POST.get('username')
         fname = request.POST.get('first_name')
         lname = request.POST.get('last_name')
