@@ -631,3 +631,6 @@ span.user_img_nav img {
 .container-fluid.bg-lightp-5 {
   background: #d3d3d32b;
 }
+input#id_post_image {
+  display: block;
+}

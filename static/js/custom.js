@@ -7,7 +7,7 @@ console.log('i am custom javascript')
 $(document).ready(function(){ 
 
   
-    $(".cust_alert").fadeOut(4000);
+    $(".cust_alert").fadeOut(6000);
  
 });
 
