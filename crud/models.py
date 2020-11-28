@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
-
+from django.urls import reverse 
 from django.utils import timezone
 
 
@@ -66,8 +66,11 @@ class Post(models.Model):
     draft = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=False,auto_now_add=True)
     
-    # class Meta:
-    #     ordering =['-timestamp']   
+    class Meta:
+        ordering =['-timestamp']   
+    
+    # def get_absolute_url(self):
+    #     return reverse('post-detail', args=[str(self.id)])
 
     def num_likes(self):
         return self.liked.all().count()  

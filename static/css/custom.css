@@ -730,7 +730,33 @@ hr {
   clear: both;
   display: table;
 }
-
+.position_item {
+  position: relative;
+  cursor: pointer;
+}
+span#pos_link i{
+  font-size:22px;
+}
+span#pos_link {
+  position: absolute;
+  left: -79px;
+  width: 200px;
+  border: 1px solid lightgray;
+  z-index: 1100;
+  bottom: -40px;
+  padding: 3px;
+  border-radius: 5px;
+  background: lightgray;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 40px;
+  transition:.3s linear;
+  display:none;
+}
+.position_item:hover span#pos_link {
+   display: flex;
+}
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
   .cancelbtn, .deletebtn {

@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from urllib.parse import quote 
 from django.http import HttpResponseRedirect,JsonResponse
 from django.contrib import messages
 from django.urls import reverse
@@ -21,7 +22,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 @login_required(login_url='login')
 def  home(request):
-    qs_list = Post.objects.filter(draft=False).order_by('-timestamp') 
+    qs_list = Post.objects.filter(draft=False)
 
     paginator= Paginator(qs_list,6)
     page = request.GET.get('page')
@@ -98,6 +99,7 @@ def PostDetailView(request,pk):
     post = Post.objects.get(id=pk)
     print('mypost:',post)
     latest_post = Post.objects.all().order_by('-timestamp')[0:5]
+    share_string = quote(post.content)
 
     profile = Profile.objects.get(user=request.user)
 
@@ -111,7 +113,7 @@ def PostDetailView(request,pk):
         form = CommentForm()
         return redirect('post-detail',pk=pk)
 
-    context ={'obj':post,'latest_post':latest_post,'form':form,'profile':profile}
+    context ={'obj':post,'latest_post':latest_post,'form':form,'profile':profile,'share_str':share_string}
     return render(request,'crud/post_detail.html',context)
 
 
