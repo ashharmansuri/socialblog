@@ -5,7 +5,7 @@ from .models import Post,Profile,Photo,Like,Comment
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
 
-    list_display=['id','title','content','author','short_description','post_image','timestamp']
+    list_display=['id','title','content','author','short_description','post_image','draft','timestamp']
 
 
 @admin.register(Profile)

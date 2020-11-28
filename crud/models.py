@@ -63,6 +63,7 @@ class Post(models.Model):
     post_image = models.ImageField(upload_to='postimages')
     liked = models.ManyToManyField(Profile,blank=True,related_name='likes')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    draft = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=False,auto_now_add=True)
     
     # class Meta:

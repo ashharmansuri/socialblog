@@ -21,7 +21,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 @login_required(login_url='login')
 def  home(request):
-    qs_list = Post.objects.all().order_by('-timestamp') 
+    qs_list = Post.objects.filter(draft=False).order_by('-timestamp') 
 
     paginator= Paginator(qs_list,6)
     page = request.GET.get('page')
@@ -370,7 +370,7 @@ def User_Login_Register(request):
         if len(username)<4:
             messages.error(request,'username must contain more than 4 character')
             return redirect('login')  
-        elif str(username).isalnum:
+        elif  not str(username).isalnum():
             messages.error(request,'username can contain only Alphanumerical')
             return redirect('login')       
         elif User.objects.filter(username=username).exists():

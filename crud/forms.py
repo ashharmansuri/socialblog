@@ -22,13 +22,13 @@ import datetime
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model=Post
-        fields=['title','content','post_image','short_description']         
+        fields=['title','content','post_image','short_description','draft']         
         widgets ={
              'title':forms.TextInput(attrs={'class':'form-control','placeholder':'Post Title'}),
              'content':forms.Textarea(attrs={'class':'form-control','placeholder':'Write Post Content....'}),
              'post_image':forms.FileInput(attrs={'class':'form-control-file'}),
              'short_description':forms.Textarea(attrs={'class':'form-control','rows':3,'cols':3,'placeholder':'Short description....'}),
-            #  'draft':forms.CheckboxInput(attrs={'class':'form-control-input'}),
+             'draft':forms.CheckboxInput(attrs={'class':'form-control-input'}),
             #  'publish':forms.TextInput(attrs={'class':'form-control','type':'date'}),
              }    
 
