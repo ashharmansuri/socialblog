@@ -58,6 +58,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     title= models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
     content= RichTextField(blank=True,null=True)
     short_description = models.TextField(max_length=200,blank=True)
     post_image = models.ImageField(upload_to='postimages')
