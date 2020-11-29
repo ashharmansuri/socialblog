@@ -134,8 +134,8 @@ def PostCreateView(request):
     
 
 @login_required(login_url='login')
-def PostUpdateView(request,pk):
-    post = Post.objects.get(id=pk)
+def PostUpdateView(request,slug=None):
+    post = Post.objects.get(slug=slug)
     fm = PostCreateForm(instance=post)
     if request.method=="POST":
         fm = PostCreateForm(request.POST,request.FILES,instance=post)
@@ -143,7 +143,7 @@ def PostUpdateView(request,pk):
             user_post=fm.save(commit=False)
             user_post.author = request.user
             user_post.save()
-            messages.success(request,'you have Updated post succesfully')
+            messages.success(request,'You have Updated post succesfully')
             return redirect('home')
 
     context ={'form':fm}

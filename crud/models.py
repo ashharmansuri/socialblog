@@ -71,7 +71,7 @@ class Post(models.Model):
         ordering =['-timestamp']   
     
     # def get_absolute_url(self):
-    #     return reverse('post-detail', args=[str(self.id)])
+    #     return reverse('post-edit', args=[str(self.slug)])
 
     def num_likes(self):
         return self.liked.all().count()  

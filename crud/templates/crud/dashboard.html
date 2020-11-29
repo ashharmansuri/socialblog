@@ -30,7 +30,7 @@
                         <p class="card-subtitle my-2 text-muted">{{userpost.timestamp}}</p>
                         <p class="card-text">{{userpost.short_description|safe}}.</p>
                         <a href="{% url 'post-detail' userpost.id %}" class="card-link text-success"> <i class="fa fa-eye"></i> View</a>
-                        <a href="{% url 'post-update' userpost.id %}" class="card-link text-primary"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="{% url 'post-update' userpost.slug %}" class="card-link text-primary"><i class="fa fa-edit"></i> Edit</a>
                         <a type="btn" class="card-link text-danger" style="cursor: pointer;" onclick="document.getElementById('id{{userpost.id}}').style.display='block'" ><i class="fa fa-trash"></i> Delete</a>
                         </div>
                     </div>
