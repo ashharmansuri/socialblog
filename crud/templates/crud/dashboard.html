@@ -44,7 +44,7 @@
                       
                             <div class="d-flex">
                               <button type="button" class="cancelbtn bg-secondary text-white" onclick="document.getElementById('id{{userpost.id}}').style.display='none'">Cancel</button>
-                              <a href="{% url 'post-delete' userpost.id %}" class="deletebtn">Delete</a>
+                              <a href="{% url 'post-delete' userpost.slug %}" class="deletebtn">Delete</a>
                             </div>
                           </div>
                         </form>

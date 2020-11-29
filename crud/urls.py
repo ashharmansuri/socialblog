@@ -13,7 +13,7 @@ urlpatterns = [
    
     path('post-create',views.PostCreateView,name='post-create'),
     path('post-edit/<slug:slug>',views.PostUpdateView,name='post-update'),
-    path('post-delete/<int:pk>',views.PostDeleteView,name='post-delete'),
+    path('post-delete/<slug:slug>',views.PostDeleteView,name='post-delete'),
     path('post-search',views.PostSearchView,name='post-search'),
     # path('post-like/<int:post_id>',views.like_unlike_post,name='post-like-view'),
     

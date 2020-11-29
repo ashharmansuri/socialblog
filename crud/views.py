@@ -150,8 +150,8 @@ def PostUpdateView(request,slug=None):
     return render(request,'crud/post_create.html',context)
 
 @login_required(login_url='login')
-def PostDeleteView(request,pk):
-    post = Post.objects.get(id=pk)
+def PostDeleteView(request,slug=None):
+    post = Post.objects.get(slug=slug)
     post.delete()
     messages.error(request ,'You have deleted Your Post')
     return redirect('dashboard')

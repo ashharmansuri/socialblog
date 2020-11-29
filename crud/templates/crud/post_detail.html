@@ -30,6 +30,7 @@
                     <div class="article-content">
                         <p  class="text-justify post_detail_text">{{obj.content| safe}}</p>
                     </div>
+                   
                     <!-- <div class="nav tag-cloud">
 
                         <a href="#">Design</a>
@@ -46,7 +47,6 @@
                         </span>  
 
                         <span class=" px-4 " id="">
-                            <i class="fas fa-comment"></i>   
                             {{obj.num_comments}} Comment
                         </span>
 
@@ -62,9 +62,9 @@
                         
                         <button type="submit" class="btn btn-light px-4 like-btn{{obj.id}}" id="like-btn">
                                 {% if profile not in obj.liked.all %}
-                                  <i class="fa fas fa-thumbs-up"></i>
+                                  <img src="{% static 'images/like.png' %}" alt="">
                                 {% else %}
-                                  <i class="fa fas fa-thumbs-up" style="color:#007bff"></i>
+                                <img src="{% static 'images/thumb-up.png' %}" alt="">
                                 {% endif%}
                         </button>
                     
@@ -72,13 +72,13 @@
                     
                     
                     <button  class="cmt_btn btn btn-light px-4 " id="{{obj.id}}">
-                        <i class="fas fa-comment"></i>   
+                        <img src="{% static 'images/comments.png' %}" alt=""> 
                         Show Comments
                     </button>
                     
                     
                     <div class="position_item" >
-                        <i class="fas fa-share-alt"></i> Share
+                        <img src="{% static 'images/share.png' %}" alt=""> Share
                        <span style="" id="pos_link">
                         <a href="https://www.facebook.com/sharer/sharer.php?u= {{request.build_absolute_uri}}">
                             <i class="fab fa-facebook-square" style="color:#3b5999;"></i>
@@ -86,7 +86,7 @@
                         <a href="https://twitter.com/home?status={{share_str|truncatechars:50}}%20{{request.build_absolute_uri}}/">
                             <i class="fab fa-twitter-square" style="color:#55acee;"></i>
                         </a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&title={{obj.title}}&{{share_str|truncatechars:50}}&source= {{request.build_absolute_uri}}/">
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&title={{obj.title}}&{{share_str|truncatechars:50}}&source={{request.build_absolute_uri}}/">
                             <i class="fab fa-linkedin" style="color:#0077B5;"></i>
                         </a>  
                        </span>
